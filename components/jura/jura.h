@@ -6,7 +6,7 @@
 #include "esphome/components/text_sensor/text_sensor.h"
 #include "esphome/core/log.h"
 #include <map>
-#include <byte>
+#include <cstddef>
 
 namespace esphome {
 namespace jura {

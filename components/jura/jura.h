@@ -105,15 +105,15 @@ class Jura : public PollingComponent, public uart::UARTDevice {
     // ---- flags ----
     std::string ic = cmd2jura("IC:");
     if (ic.size() >= 7) {
-      std::byte a = static_cast<std::byte>(strtol(ic.substr(3,2).c_str(), NULL, 16));
-      std::byte b = static_cast<std::byte>(strtol(ic.substr(5,2).c_str(), NULL, 16));
+      uint8_t a = static_cast<uint8_t>(strtol(ic.substr(3,2).c_str(), NULL, 16));
+      uint8_t b = static_cast<uint8_t>(strtol(ic.substr(5,2).c_str(), NULL, 16));
 
       publish_ic_bits_if_changed_(a, b);     
 
-      std::byte trayBit       = bitRead(a, 4);
-      std::byte left_readyBit = bitRead(a, 2);
-      std::byte tankBit       = bitRead(b, 5);
-      std::byte right_busyBit = bitRead(b, 6);
+      uint8_t trayBit       = bitRead(a, 4);
+      uint8_t left_readyBit = bitRead(a, 2);
+      uint8_t tankBit       = bitRead(b, 5);
+      uint8_t right_busyBit = bitRead(b, 6);
 
       std::string tray_status = (trayBit == 1) ? "Present" : "Missing";
       std::string tank_status = (tankBit == 1) ? "Fill Tank" : "OK";

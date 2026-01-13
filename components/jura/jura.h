@@ -17,8 +17,8 @@ class Jura : public PollingComponent, public uart::UARTDevice {
   static uint8_t bitRead(uint8_t val, uint8_t pos) {
     return (val & (1<<pos) != 0) ? 1 : 0;
   }
-  template<typename T> T bitWrite(T val, uint8_t pos, uint8_t val) {
-   T res = val;
+  template<typename T> T bitWrite(T inval, uint8_t pos, uint8_t val) {
+   T res = inval;
    res &= ~(1<<pos);
    res |= val >0 ? 1<<pos : 0;
    return res;

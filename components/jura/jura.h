@@ -11,6 +11,7 @@
 namespace esphome {
 namespace jura {
 
+#error "Boo"
 
 class Jura : public PollingComponent, public uart::UARTDevice {
  public:

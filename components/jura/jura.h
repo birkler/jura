@@ -11,11 +11,13 @@
 namespace esphome {
 namespace jura {
 
-static uint8_t bitRead(uint8_t val, uint8_t bita) {
-  return (val & (1<<bita) != 0) ? 1 : 0;
-}
 
 class Jura : public PollingComponent, public uart::UARTDevice {
+ public:
+  static uint8_t bitRead(uint8_t val, uint8_t bita) {
+    return (val & (1<<bita) != 0) ? 1 : 0;
+  }
+
  public:
   void set_model(const std::string &m) { model_ = m; }
 

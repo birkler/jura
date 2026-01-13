@@ -6,6 +6,7 @@
 #include "esphome/components/text_sensor/text_sensor.h"
 #include "esphome/core/log.h"
 #include <map>
+#include <byte>
 
 namespace esphome {
 namespace jura {
@@ -97,15 +98,15 @@ class Jura : public PollingComponent, public uart::UARTDevice {
     // ---- flags ----
     std::string ic = cmd2jura("IC:");
     if (ic.size() >= 7) {
-      byte a = static_cast<byte>(strtol(ic.substr(3,2).c_str(), NULL, 16));
-      byte b = static_cast<byte>(strtol(ic.substr(5,2).c_str(), NULL, 16));
+      std::byte a = static_cast<std::byte>(strtol(ic.substr(3,2).c_str(), NULL, 16));
+      std::byte b = static_cast<std::byte>(strtol(ic.substr(5,2).c_str(), NULL, 16));
 
       publish_ic_bits_if_changed_(a, b);     
 
-      byte trayBit       = bitRead(a, 4);
-      byte left_readyBit = bitRead(a, 2);
-      byte tankBit       = bitRead(b, 5);
-      byte right_busyBit = bitRead(b, 6);
+      std::byte trayBit       = bitRead(a, 4);
+      std::byte left_readyBit = bitRead(a, 2);
+      std::byte tankBit       = bitRead(b, 5);
+      std::byte right_busyBit = bitRead(b, 6);
 
       std::string tray_status = (trayBit == 1) ? "Present" : "Missing";
       std::string tank_status = (tankBit == 1) ? "Fill Tank" : "OK";
